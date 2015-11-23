@@ -137,18 +137,8 @@ double mod(double a) {
 
 double DTW_distance(vector<double>& a, vector<double>& b) {
 
-	double alpha[a.size()][b.size()];
 	double m[a.size()][b.size()];
 	int i, j;
-
-
-	// matriz das distâncias
-	for (i = 0; i < a.size(); i++) {
-		for (j = 0; j < b.size(); j++) {
-
-			alpha[i][j] = pow((a.at(i) - b.at(j)), 2);
-		}
-	}
 
 	// inicialização da matriz de memoização
 	for (i = 0; i < a.size(); i++) {
@@ -162,9 +152,12 @@ double DTW_distance(vector<double>& a, vector<double>& b) {
 	// dp
 	for (i = 1; i < a.size(); i++) {
 		for (j = 1; j < b.size(); j++) {
-			m[i][j] = alpha[i][j] + min_of_three(m[i-1][j-1], m[i][j-1], m[i-1][j]);
+
+			double alpha = pow((a.at(i) - b.at(j)), 2);
+			//cout << "alpha: " << alpha << endl;
+			m[i][j] = alpha + min_of_three(m[i-1][j-1], m[i][j-1], m[i-1][j]);
 		}
 	}
 	 
-	return m[i][j];
+	return m[a.size()-1][b.size()-1];
 }
