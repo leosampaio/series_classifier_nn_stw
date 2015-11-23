@@ -86,9 +86,6 @@ int main (int argc, char** argv) {
 		// checa se o classificador acertou
 		if (shortest_distance_series.label == current_series.label) {
 			accuracy_count += 1;
-			cout << "acertou!" << endl;
-		} else { 
-			cout << "ERRRROOU" << endl;
 		}
 	}
 
@@ -154,7 +151,6 @@ double DTW_distance(vector<double>& a, vector<double>& b) {
 		for (j = 1; j < b.size(); j++) {
 
 			double alpha = pow((a.at(i) - b.at(j)), 2);
-			//cout << "alpha: " << alpha << endl;
 			m[i][j] = alpha + min_of_three(m[i-1][j-1], m[i][j-1], m[i-1][j]);
 		}
 	}
